@@ -4,6 +4,7 @@ import { Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
 import Loader from "../components/Loader.jsx";
 import { set } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
     const [page, setPage] = useState(1);
@@ -11,6 +12,7 @@ function Home() {
     const [loading, setLoading] = useState(true);
     const [disableNextBtn, setDisableNextBtn] = useState(false);
     const authStatus = useSelector((state) => state.auth.status);
+    const navigate = useNavigate();
 
     useEffect(() => {
         Service.getPosts(page)
@@ -48,7 +50,7 @@ function Home() {
                             <h1 className="text-xl md:text-2xl font-bold text-gray-700">
                                 {authStatus
                                     ? "No Posts Available at this time"
-                                    : "Login to view Posts"}
+                                    : navigate("/signup")}
                             </h1>
                         </div>
                     </div>
