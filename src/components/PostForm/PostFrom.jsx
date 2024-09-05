@@ -46,6 +46,8 @@ export default function PostForm({ post }) {
             const dbPost = await Service.createPost(formData);
             navigate(`/post/${dbPost.slug}`);
         }
+
+        setIsSubmitting(false);
     };
 
     const slugTransform = useCallback((value) => {

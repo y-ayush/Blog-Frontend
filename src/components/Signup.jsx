@@ -25,6 +25,8 @@ function Signup() {
             }
         } catch (error) {
             setError(error.message);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 

@@ -30,6 +30,8 @@ export default function Post() {
             await Service.deletePost(post.slug);
             navigate("/");
         }
+
+        setIsSubmitting(false);
     };
 
     return post ? (
