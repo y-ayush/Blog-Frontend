@@ -1,0 +1,11 @@
+{
+    "rewrites": [
+        { "source": "/login", "destination": "/" },
+        { "source": "/signup", "destination": "/" },
+        { "source": "/user/:userId", "destination": "/" },
+        { "source": "/add-post", "destination": "/" },
+        { "source": "/edit-post/:slug", "destination": "/" },
+        { "source": "/post/:slug", "destination": "/" },
+        { "source": "/(.*)", "destination": "/" }
+    ]
+}
