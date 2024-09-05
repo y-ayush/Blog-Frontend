@@ -1,8 +1,6 @@
 import fetchAPI from "../utils/fetchAPI.js";
-import conf from "../conf/conf.js";
 
-const serverUrl = conf.serverUrl;
-const url = serverUrl + "/api/v1/users";
+const url = "/api/v1/users";
 
 class UserService {
     async createAccount({ name, email, password }) {
