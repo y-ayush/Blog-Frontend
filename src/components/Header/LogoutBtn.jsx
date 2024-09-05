@@ -2,14 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import authService from "../../Services/user.service.js";
 import { logout as logoutFeature } from "../../features/auth.slice.js";
+import { useNavigate } from "react-router-dom";
 
 function LogoutBtn() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     async function logoutHandler() {
         try {
             await authService.logout();
             dispatch(logoutFeature());
+            navigate("/");
         } catch (error) {
             console.error("Logout failed", error);
         }

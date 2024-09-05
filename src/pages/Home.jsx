@@ -3,7 +3,6 @@ import Service from "../Services/post.service.js";
 import { Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
 import Loader from "../components/Loader.jsx";
-import { set } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -11,6 +10,7 @@ function Home() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [disableNextBtn, setDisableNextBtn] = useState(false);
+    const [noPostsAvailable, setNoPostsAvailable] = useState(false);
     const authStatus = useSelector((state) => state.auth.status);
     const navigate = useNavigate();
 
@@ -37,20 +37,28 @@ function Home() {
             });
     }, [page]);
 
+    useEffect(() => {
+        if (!authStatus) {
+            navigate("/signup");
+        }
+    }, [authStatus, navigate]);
+
     if (loading) {
         return <Loader />;
     }
 
     if (posts.length === 0) {
+        setNoPostsAvailable(true);
+    }
+
+    if (noPostsAvailable) {
         return (
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <div className="flex flex-col justify-center items-center">
                         <div className="p-4">
                             <h1 className="text-xl md:text-2xl font-bold text-gray-700">
-                                {authStatus
-                                    ? "No Posts Available at this time"
-                                    : navigate("/signup")}
+                                No Posts Available at this time
                             </h1>
                         </div>
                     </div>
